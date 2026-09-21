@@ -17,7 +17,7 @@ index.html                The full site (opening curtain reveal, hero,
                            reception, family, closing).
 assets/hero.jpg            Portrait decoration photo used in the hero background.
 assets/soft-bg.jpg         Softened/blurred variant used in the closing section.
-assets/og-image.jpg        1200x630 preview image used when the link is
+assets/og-image.jpg        1200x675 preview image used when the link is
                             shared on WhatsApp/social media/iMessage etc.
 assets/music.mp3            The wedding song, tap the note icon (bottom-right)
                              to play/pause it — never autoplays.
@@ -37,7 +37,6 @@ NOTES
   has no map button because it has no venue of its own.
 - Social-share preview (Open Graph) tags are set in the <head> of
   index.html, pointing to https://joji-irin.vercel.app/ and
-  https://joji-irin.vercel.app/assets/og-image.jpg. That address is a
-  placeholder — if you deploy the site at a different URL, update the
-  canonical, og:url, og:image and twitter:image values to match, otherwise the
-  WhatsApp/social preview image will not load.
+  https://joji-irin.vercel.app/assets/og-image.jpg. If you deploy the site at
+  a different URL, update the canonical, og:url, og:image and twitter:image
+  values to match.
