@@ -233,12 +233,40 @@ img{max-width:100%; display:block;}
 @keyframes fadeUp{ from{ opacity:0; transform:translateY(20px);} to{ opacity:1; transform:translateY(0);} }
 
 .scroll-cue{
-  position:absolute; bottom:24px; left:50%; transform:translateX(-50%); z-index:2;
-  display:flex; flex-direction:column; align-items:center; gap:8px;
-  opacity:0; animation:fadeIn 1.4s var(--ease) forwards; animation-delay:1.6s;
+  position:absolute; bottom:32px; left:50%; transform:translateX(-50%); z-index:2;
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  opacity:0; animation:fadeIn 1.4s var(--ease) forwards; animation-delay:1.8s;
+  cursor:pointer; background:none; border:none; padding:0; text-decoration:none;
 }
-.scroll-cue .line{ width:1px; height:34px; background:rgba(255,255,255,.7); animation:extend 2.6s ease-in-out infinite; transform-origin:top; }
-@keyframes extend{ 0%,100%{ transform:scaleY(.55); opacity:.5; } 50%{ transform:scaleY(1); opacity:1; } }
+.scroll-cue-label{
+  font-family:'Jost',sans-serif; font-size:.62rem; font-weight:500;
+  letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.75);
+  text-shadow:0 1px 8px rgba(0,0,0,.4);
+}
+.scroll-cue-ring{
+  width:44px; height:44px; border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.45);
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(4px);
+  display:flex; align-items:center; justify-content:center;
+  transition:border-color .35s var(--ease), background .35s var(--ease), transform .35s var(--ease);
+  animation:scrollBounce 2.4s ease-in-out infinite;
+}
+.scroll-cue:hover .scroll-cue-ring{
+  border-color:rgba(255,255,255,.85);
+  background:rgba(255,255,255,.18);
+  transform:translateY(3px);
+}
+.scroll-cue:focus-visible{ outline:none; }
+.scroll-cue:focus-visible .scroll-cue-ring{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(184,148,90,.4);
+}
+.scroll-cue-ring svg{ width:16px; height:16px; stroke:rgba(255,255,255,.9); }
+@keyframes scrollBounce{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(7px); }
+}
 @keyframes fadeIn{ to{ opacity:1; } }
 
 /* ============ COUPLE ============ */
@@ -537,7 +565,14 @@ footer.site-footer{
       <div class="hero-name n2 serif">Irin Mathew</div>
       <div class="hero-date">14 &amp; 16 November 2026</div>
     </div>
-    <div class="scroll-cue"><div class="line"></div></div>
+    <button class="scroll-cue" id="scrollCueBtn" type="button" aria-label="Scroll down">
+      <span class="scroll-cue-label">Scroll</span>
+      <div class="scroll-cue-ring">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+    </button>
   </section>
 
   <!-- COUPLE -->
@@ -808,6 +843,17 @@ footer.site-footer{
   if(couplePhoto){
     couplePhoto.addEventListener('click', function(){
       couplePhoto.classList.add('revealed');
+    });
+  }
+
+  // ---- Hero scroll button ----
+  var scrollCueBtn = document.getElementById('scrollCueBtn');
+  if(scrollCueBtn){
+    scrollCueBtn.addEventListener('click', function(){
+      var coupleSection = document.getElementById('couple');
+      if(coupleSection){
+        coupleSection.scrollIntoView({ behavior: 'smooth' });
+      }
     });
   }
 
